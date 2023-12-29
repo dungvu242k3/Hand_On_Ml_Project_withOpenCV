@@ -20,12 +20,20 @@ pts5 = np.array([[12,171],[195,171],[141,281]],np.int32)
 cv2.fillPoly(img2,[pts5],(255,255,255))
 
 bitwise_xor = cv2.bitwise_xor(img1,img2)
-bitwise_xor = cv2.cvtColor(bitwise_xor,cv2.COLOR_BGR2GRAY)
-rows, cols = bitwise_xor.shape
-noise_white = np.random.choice([0, 1, 255], size=(rows-50, cols-50), p=[0.98, 0.01,0.01])
-image1 = cv2.add(bitwise_xor, noise_white.astype(np.uint8))
-image2 = cv2.medianBlur(image1,9)
-cv2.imshow("anh",image1)
-cv2.imshow("kq",image2)
+white_background = np.ones((512, 512, 3), np.uint8) * 0
+rows, cols, _ = white_background.shape
+pixels = int(rows * cols * 0.02)
+
+for _ in range(pixels):
+    x = np.random.randint(0, cols)
+    y = np.random.randint(0, rows)
+    white_background[y, x] = [255,255,255]
+final_image = cv2.bitwise_xor(bitwise_xor, white_background)
+kernel12 = np.ones((3,3),np.uint8)
+image1= cv2.morphologyEx(final_image, cv2.MORPH_OPEN, kernel12)
+image2 = cv2.morphologyEx(final_image, cv2.MORPH_CLOSE, kernel12)
+cv2.imshow("kq",final_image)
+cv2.imshow("kq1",image1)
+cv2.imshow("kq2",image2)
 cv2.waitKey()
 cv2.destroyAllWindows()
