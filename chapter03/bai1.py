@@ -10,8 +10,8 @@ gp2 = [G2]
 for i in range(6):
     G1 = cv2.pyrDown(G1)
     G2 = cv2.pyrDown(G2)
-lp1 = [gp1[5]]
-lp2 = [gp2[5]]
+lp1 = [gp1[-1]]
+lp2 = [gp2[-1]]
 for i in range(5,0,-1):
     lp1.append(cv2.subtract(gp1[i-1], cv2.pyrUp(gp1[i])))
     lp2.append(cv2.subtract(gp2[i-1], cv2.pyrUp(gp2[i])))
