@@ -23,7 +23,6 @@ bitwise_xor = cv2.bitwise_xor(img1,img2)
 white_background = np.ones((512, 512, 3), np.uint8) * 0
 rows, cols, _ = white_background.shape
 pixels = int(rows * cols * 0.02)
-
 for _ in range(pixels):
     x = np.random.randint(0, cols)
     y = np.random.randint(0, rows)
