@@ -16,9 +16,14 @@ kq2 = np.copy(img2)
 kq1[:,200:] = blurr1
 kq2[:,:150] = blurr2
 
-kq = cv2.addWeighted(kq1,0.7,kq2,0.2,0)
 
-cv2.imshow("kq",kq)
-
+kq = 1.3*kq1 + 0.15*kq2 + -75
+kq = np.clip(kq,10,255).astype('uint8')
+kq3 = 0.2*kq1 + 0.7*kq2 + -10
+kq3 = np.clip(kq3,0,255).astype('uint8')
+result = cv2.addWeighted(kq,0.5,kq3,0.55,-40)
+#cv2.imshow("kq",kq)
+#cv2.imshow("kq3",kq3)
+cv2.imshow("result",result)
 cv2.waitKey()
 cv2.destroyAllWindows()
