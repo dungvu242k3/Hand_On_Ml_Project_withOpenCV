@@ -28,9 +28,18 @@ def random_brightness(image):
     return brightened_image
 
 image = cv2.imread("C:/Users/dungv/Projects/Hand_On_Ml_Project_withOpenCV/chapter03/image-dog.jpg")
+
 image1 = image.copy()
-random_function = np.random.choice([random_flip, random_shift, random_rotation, random_brightness])
-image1 = random_function(image1)
-cv2.imshow('kq1',image1)
+image1 = random_flip(image1)
+cv2.imshow('flip',image1)
+#cv2.waitKey(0)
+image1 = random_shift(image1)
+cv2.imshow('shift',image1)
+#cv2.waitKey(0)
+image1 = random_rotation(image1)
+cv2.imshow('rotation',image1)
+#cv2.waitKey(0)
+image1 = random_brightness(image1)
+cv2.imshow('brightness',image1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
